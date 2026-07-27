@@ -1,0 +1,255 @@
+/* =============================================================
+   casSonovi — digitaal gastenhandboek
+   Richting 2A (zonnig & gezellig). Alle waarden komen uit de
+   designhandoff: design_handoff_gastenhandboek_2A/README.md
+   ============================================================= */
+
+/* ---- design tokens ---------------------------------------------------- */
+:root {
+  --bg: #FFF9F0;
+  --surface: #FFFFFF;
+  --ink: #3B2A1E;
+  --ink-soft: #6B5340;
+  --ink-muted: #8A6A52;
+  --border: #F2DCC4;
+  --border-nav: #F1E1CC;
+  --photo-fallback: #F3E3CE;
+
+  --terracotta: #D9603B;
+  --terracotta-deep: #A83E22;
+  --terracotta-tint: #FBEDE6;
+  --terracotta-text: #9E4426;
+
+  --teal: #1F5C50;
+  --teal-tint: #E9F3EF;
+  --teal-line: #33695D;
+  --teal-border: #4C7F73;
+  --teal-label: #9EC6BB;
+
+  --saffron: #F2B233;
+  --saffron-tint: #FCF0DA;
+
+  --cream: #FFF9F0;
+
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'Nunito Sans', system-ui, -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --pad: 22px;        /* horizontale contentmarge */
+  --nav-offset: 56px; /* scroll-offset onder de sticky nav */
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+body {
+  margin: 0 auto;
+  max-width: 390px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  /* geen animaties in dit design: bewust geen scroll-behavior: smooth */
+}
+button { font-family: inherit; margin: 0; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 2px; }
+
+/* ---- foto's ------------------------------------------------------------ */
+.photo { background: var(--photo-fallback); overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* per foto een eigen uitsnede, zodat het onderwerp in beeld blijft */
+.photo--hero img       { object-position: 50% 50%; }
+.photo--zwembad img    { object-position: 50% 58%; }
+.photo--strand img     { object-position: 50% 90%; }
+.photo--supermarkt img { object-position: 50% 42%; }
+.photo--eten img       { object-position: 50% 26%; }
+
+/* De hostfoto heeft weinig ruimte boven het hoofd: in plaats van object-position
+   schalen en verschuiven we het beeld, zodat het gezicht in de cirkel gecentreerd staat. */
+.photo--host img { width: 86px; height: 100px; margin: -2px 0 0 -9px; }
+
+/* ---- hero -------------------------------------------------------------- */
+.hero { position: relative; height: 296px; }
+.hero .photo { position: absolute; inset: 0; }
+.hero-scrim {
+  position: absolute; inset: auto 0 0 0; height: 170px; pointer-events: none;
+  background: linear-gradient(to top, rgba(45,28,18,.78), rgba(45,28,18,0));
+}
+.hero-text { position: absolute; left: var(--pad); right: var(--pad); bottom: 20px; pointer-events: none; }
+.hero-title { font-family: var(--serif); font-size: 38px; line-height: 1.05; color: var(--cream); }
+.hero-sub { margin-top: 6px; font-size: 14.5px; font-weight: 600; color: #F6DFC8; }
+
+.lang {
+  position: absolute; top: 14px; right: 14px;
+  display: flex; gap: 4px; padding: 4px;
+  background: rgba(255,249,240,.94); border-radius: 999px;
+}
+.lang button {
+  border: 0; cursor: pointer; min-height: 44px; min-width: 52px; padding: 0 16px;
+  border-radius: 999px; font-size: 14px; font-weight: 700;
+  background: transparent; color: #6B4F3A;
+}
+.lang button[aria-pressed="true"] { background: var(--terracotta); color: var(--cream); font-weight: 800; }
+
+/* ---- welkom + sticky nav ----------------------------------------------- */
+.welkom { padding: 20px var(--pad) 16px; }
+.welkom p { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.5; }
+.en-notice {
+  margin-top: 12px; font-size: 13.5px; font-weight: 600; line-height: 1.45;
+  color: var(--terracotta-text); background: var(--terracotta-tint);
+  border-radius: 12px; padding: 10px 12px;
+}
+.en-notice[hidden] { display: none; }
+
+nav.sticky {
+  position: sticky; top: 0; z-index: 5;
+  background: rgba(255,249,240,.97);
+  border-bottom: 1px solid var(--border-nav);
+  padding: 10px 0;
+}
+.chips { display: flex; gap: 7px; overflow-x: auto; padding: 0 var(--pad); scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chips button {
+  flex: none; cursor: pointer; white-space: nowrap;
+  min-height: 44px; padding: 0 17px; border-radius: 999px;
+  font-size: 14.5px; font-weight: 700;
+  background: var(--surface); border: 1.5px solid var(--border); color: #6B4F3A;
+}
+.chips button[aria-current="true"] { background: var(--terracotta); border-color: var(--terracotta); color: var(--cream); }
+
+/* ---- secties ------------------------------------------------------------ */
+section { padding: 4px var(--pad) 22px; }
+section:first-of-type { padding-top: 24px; }
+section:last-of-type { padding-bottom: 36px; }
+h2 { font-family: var(--serif); font-weight: 400; font-size: 25px; line-height: 1.15; margin: 0; }
+.sub { margin-top: 4px; font-size: 13.5px; color: var(--ink-muted); }
+.col { display: flex; flex-direction: column; }
+
+/* hulp */
+.host {
+  display: flex; align-items: center; gap: 14px; margin-top: 14px;
+  background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px; padding: 14px;
+}
+.host .avatar { flex: none; width: 64px; height: 64px; border-radius: 999px; }
+.host p { flex: 1; margin: 0; font-size: 14.5px; line-height: 1.5; }
+.host strong { font-weight: 800; }
+
+.help-list { gap: 10px; margin-top: 12px; }
+.help-card {
+  display: flex; align-items: center; min-height: 66px;
+  border-radius: 18px; padding: 14px 18px;
+}
+.help-card b { display: block; font-size: 16.5px; font-weight: 800; }
+.help-card small { display: block; margin-top: 2px; font-size: 13.5px; }
+.help-card.teal { background: var(--teal-tint); color: var(--teal); }
+.help-card.teal small { color: #2E5B51; }
+.help-card.saffron { background: var(--saffron-tint); color: #7A5514; }
+.help-card.saffron small { color: #6F4C0F; }
+.help-card.urgent { background: var(--terracotta-deep); color: #FFFFFF; }
+.help-card.urgent small { color: #FBE7DF; }
+
+/* Zachte variant van de noodgevalkaart (handoff: emergencyProminent = false).
+   Zet class "soft-emergency" op <body> om deze aan te zetten. */
+body.soft-emergency .help-card.urgent { background: var(--terracotta-tint); color: var(--terracotta-text); }
+body.soft-emergency .help-card.urgent small { color: #8C4327; }
+
+/* wifi */
+.wifi { margin-top: 14px; background: var(--teal); border-radius: 22px; padding: 20px; }
+.wifi-label { font-size: 12.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--teal-label); }
+.wifi-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 5px; }
+.wifi-value { font-family: var(--mono); font-weight: 600; color: var(--cream); }
+.wifi-value.net { font-size: 21px; }
+.wifi-value.pw { font-size: 25px; }
+.wifi hr { height: 1px; border: 0; background: var(--teal-line); margin: 16px 0; }
+.copy {
+  flex: none; cursor: pointer; min-height: 44px; padding: 0 16px; border-radius: 999px;
+  font-size: 14.5px; font-weight: 700;
+}
+.copy.ghost { background: transparent; border: 1.5px solid var(--teal-border); color: var(--cream); }
+.copy.solid { background: var(--saffron); border: 0; color: var(--ink); font-weight: 800; }
+.copied { margin-top: 13px; font-size: 13.5px; font-weight: 700; color: var(--saffron); }
+.copied[hidden] { display: none; }
+.wifi-foot { margin-top: 11px; font-size: 13.5px; color: var(--ink-muted); }
+
+/* aankomst */
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.tile { border-radius: 18px; padding: 14px 16px; }
+.tile.in { background: var(--saffron-tint); }
+.tile.in .tile-label { color: #96702A; }
+.tile.out { background: var(--teal-tint); }
+.tile.out .tile-label { color: #3F7368; }
+.tile-label { font-size: 13.5px; font-weight: 700; }
+.tile-value { margin-top: 3px; font-size: 20px; font-weight: 800; }
+.blocks { gap: 14px; margin-top: 16px; }
+.blocks h3 { margin: 0; font-size: 16px; font-weight: 800; }
+.blocks p { margin: 3px 0 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); }
+.blocks code { font-family: var(--mono); font-weight: 600; color: var(--ink); }
+
+/* in huis */
+.pool { margin-top: 14px; height: 150px; border-radius: 20px; }
+.acc-list { gap: 10px; margin-top: 14px; }
+.acc { background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px; overflow: hidden; }
+.acc > button {
+  display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 58px; padding: 14px 18px; background: transparent; border: 0; cursor: pointer;
+  text-align: left; color: var(--ink);
+}
+.acc > button > span:first-child { font-size: 16.5px; font-weight: 800; }
+.acc .sign { font-family: var(--mono); font-size: 19px; color: #B08A63; }
+.acc-body { padding: 0 18px 16px; font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); }
+.acc-body[hidden] { display: none; }
+
+/* regels */
+.rules { gap: 9px; margin: 14px 0 0; padding: 0; list-style: none; }
+.rules li {
+  background: var(--saffron-tint); border-radius: 14px; padding: 13px 16px;
+  font-size: 14.5px; font-weight: 600; line-height: 1.45;
+}
+
+/* omgeving */
+.spots { gap: 14px; margin-top: 14px; }
+.spot { background: var(--surface); border: 1.5px solid var(--border); border-radius: 20px; overflow: hidden; }
+.spot .photo { height: 132px; }
+.spot-body { padding: 14px 16px 16px; }
+.spot-body h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 21px; }
+.spot-body p { margin: 6px 0 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); }
+
+/* vertrek */
+.tasks { gap: 9px; margin-top: 14px; }
+.task {
+  display: flex; align-items: center; gap: 13px; width: 100%; min-height: 52px;
+  padding: 11px 15px; border-radius: 14px; cursor: pointer;
+  font-size: 14.5px; font-weight: 600; line-height: 1.4; text-align: left;
+  background: var(--surface); border: 1.5px solid var(--border); color: var(--ink);
+}
+.task .box {
+  flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 999px;
+  border: 1.5px solid #DCC7AE; font-size: 14px; font-weight: 800; color: #FFFFFF;
+}
+.task[aria-pressed="true"] { background: var(--terracotta-tint); border-color: var(--terracotta); color: var(--terracotta-text); }
+.task[aria-pressed="true"] .box { background: var(--terracotta); border-color: var(--terracotta); }
+.outro {
+  margin-top: 22px; padding: 16px 18px; background: var(--teal-tint); border-radius: 18px;
+  font-size: 14.5px; line-height: 1.5; color: var(--teal);
+}
+
+/* alleen voor schermlezers */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---- presentatie op groot scherm ---------------------------------------
+   Puur presentatie (handoff: "de framerand in de mock is alleen presentatie").
+   Op de telefoon — waar dit handboek gebruikt wordt — verandert er niets.   */
+@media (min-width: 560px) {
+  html { background: #F0E4D3; }
+  body {
+    margin-block: 32px;
+    border-radius: 28px;
+    box-shadow: 0 18px 50px rgba(59, 42, 30, .18);
+  }
+  .hero { border-radius: 28px 28px 0 0; overflow: hidden; }
+  section:last-of-type { padding-bottom: 44px; }
+}

@@ -1,0 +1,190 @@
+{
+  "meta": {
+    "huis": "casSonovi",
+    "locatie": "Noord, Aruba",
+    "ondertitel": "Noord, Aruba · 12 minuten van Eagle Beach",
+    "taal": "nl"
+  },
+  "welkom": "Welkom. Alles wat je nodig hebt staat hieronder — wifi, tijden, en waar je lekker eet.",
+  "enNotice": "De Engelse versie is in deze mock-up nog niet uitgewerkt.",
+  "nav": [
+    {
+      "key": "hulp",
+      "label": "Hulp"
+    },
+    {
+      "key": "wifi",
+      "label": "Wifi"
+    },
+    {
+      "key": "aankomst",
+      "label": "Aankomst"
+    },
+    {
+      "key": "inhuis",
+      "label": "In huis"
+    },
+    {
+      "key": "regels",
+      "label": "Regels"
+    },
+    {
+      "key": "omgeving",
+      "label": "Omgeving"
+    },
+    {
+      "key": "vertrek",
+      "label": "Vertrek"
+    }
+  ],
+  "hulp": {
+    "kop": "Hulp nodig?",
+    "host": {
+      "naam": "Norvin",
+      "tekst": "— je host. Bereikbaar van 08:00 tot 22:00, meestal binnen een uur antwoord."
+    },
+    "acties": [
+      {
+        "key": "stuk",
+        "titel": "Iets is stuk",
+        "sub": "Stuur een foto via WhatsApp",
+        "variant": "teal",
+        "href": "https://wa.me/2975924180"
+      },
+      {
+        "key": "vraag",
+        "titel": "Vraag over je verblijf",
+        "sub": "WhatsApp of bel +297 592 4180",
+        "variant": "saffron",
+        "href": "https://wa.me/2975924180"
+      },
+      {
+        "key": "nood",
+        "titel": "Noodgeval — bel 911",
+        "sub": "Politie, ambulance en brandweer",
+        "variant": "urgent",
+        "href": "tel:911"
+      }
+    ]
+  },
+  "wifi": {
+    "kop": "Wifi",
+    "netwerk": "casSonovi",
+    "wachtwoord": "welkom2026",
+    "kopieerLabel": "Kopieer",
+    "bevestiging": "Gekopieerd naar het klembord.",
+    "voetnoot": "Eén netwerk in het hele appartement, ook op het terras."
+  },
+  "aankomst": {
+    "kop": "Aankomst & vertrek",
+    "tegels": [
+      {
+        "label": "Inchecken",
+        "waarde": "12:00–01:00"
+      },
+      {
+        "label": "Uitchecken",
+        "waarde": "voor 15:00"
+      }
+    ],
+    "blokken": [
+      {
+        "titel": "Sleutel",
+        "tekst": "Sleutelkastje rechts van de voordeur, code 2814. Draai de knop na sluiten door.",
+        "code": "2814"
+      },
+      {
+        "titel": "Parkeren",
+        "tekst": "Eigen plek links van het hek. Gratis, geen registratie nodig."
+      },
+      {
+        "titel": "Later aankomen?",
+        "tekst": "Geen probleem, laat het even weten zodat het licht aan staat."
+      }
+    ]
+  },
+  "inhuis": {
+    "kop": "In huis",
+    "items": [
+      {
+        "key": "zwembad",
+        "titel": "Zwembad",
+        "tekst": "Open van 08:00 tot 22:00, gedeeld met de bovenwoning. Handdoeken liggen in de badkamerkast — badlakens graag niet mee naar het strand. Geen glas op de rand."
+      },
+      {
+        "key": "keuken",
+        "titel": "Keuken",
+        "tekst": "Kookplaat, combi-oven en waterkoker. Koffie: filters en gemalen koffie in de bovenste lade links. Peper, zout en olie mag je gebruiken."
+      },
+      {
+        "key": "airco",
+        "titel": "Airco",
+        "tekst": "Slaapkamer en woonkamer regel je apart. 22 tot 24 graden werkt het best; houd deuren en ramen dan dicht. Zet hem uit als je weggaat."
+      },
+      {
+        "key": "wasgoed",
+        "titel": "Wasgoed",
+        "tekst": "Wasmachine in de berging, wasmiddel staat ernaast. Programma 3 is kort. Droogrek op het terras, niet over de balustrade hangen."
+      },
+      {
+        "key": "apparaten",
+        "titel": "Tv en apparaten",
+        "tekst": "Tv staat op HDMI 1 voor streaming; de afstandsbediening ligt in de lade onder de tv. Ventilator in de slaapkamerkast. Föhn in de badkamerlade."
+      }
+    ]
+  },
+  "regels": {
+    "kop": "Huisregels",
+    "items": [
+      "Maximaal 2 gasten. Bezoek welkom, blijven slapen niet.",
+      "Rust tussen 22:00 en 08:00 — de buren wonen dicht op ons.",
+      "Binnen niet roken. Op het terras mag, asbak staat op tafel.",
+      "Geen huisdieren."
+    ]
+  },
+  "omgeving": {
+    "kop": "Ontdek de omgeving",
+    "blokken": [
+      {
+        "key": "strand",
+        "titel": "Strand",
+        "regels": [
+          "Eagle Beach — 10 minuten rijden, brede baai, palapa's vroeg bezet.",
+          "Arashi Beach — rustiger, goed snorkelen bij de rotsen links."
+        ]
+      },
+      {
+        "key": "supermarkt",
+        "titel": "Supermarkt",
+        "regels": [
+          "Super Food Plaza — groot, dagelijks tot 21:00, 6 minuten rijden.",
+          "Ling & Sons — kleiner, goede visafdeling."
+        ]
+      },
+      {
+        "key": "eten",
+        "titel": "Eten",
+        "regels": [
+          "Zeerovers — verse vis aan de haven, alleen cash, geen reservering.",
+          "Gasparito — Arubaanse keuken, 's avonds reserveren.",
+          "Eduardo's Beach Shack — ontbijt en smoothies aan het strand."
+        ]
+      }
+    ]
+  },
+  "vertrek": {
+    "kop": "Voordat je vertrekt",
+    "sub": "Tik af wat je hebt gedaan.",
+    "taken": [
+      "Afwas gedaan of vaatwasser aan",
+      "Afval in de container bij het hek",
+      "Airco, ventilator en lichten uit",
+      "Ramen en terrasdeur dicht",
+      "Sleutel terug in het kastje"
+    ],
+    "afsluiter": "Fijne reis terug — en kom gerust weer langs. Laat weten wat we beter kunnen doen."
+  },
+  "placeholders": {
+    "let_op": "Wifi-gegevens, sleutelcode, telefoonnummer en de omgevingstips zijn placeholders en moeten door de host worden bevestigd."
+  }
+}

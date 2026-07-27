@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>casSonovi — gastenhandboek (referentie 2A)</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet">
+<style>
+  /* ---- design tokens ---------------------------------------------------- */
+  :root {
+    --bg: #FFF9F0;
+    --surface: #FFFFFF;
+    --ink: #3B2A1E;
+    --ink-soft: #6B5340;
+    --ink-muted: #8A6A52;
+    --border: #F2DCC4;
+    --border-nav: #F1E1CC;
+    --photo-fallback: #F3E3CE;
+
+    --terracotta: #D9603B;
+    --terracotta-deep: #A83E22;
+    --terracotta-tint: #FBEDE6;
+    --terracotta-text: #9E4426;
+
+    --teal: #1F5C50;
+    --teal-tint: #E9F3EF;
+    --teal-line: #33695D;
+    --teal-border: #4C7F73;
+    --teal-label: #9EC6BB;
+
+    --saffron: #F2B233;
+    --saffron-tint: #FCF0DA;
+
+    --cream: #FFF9F0;
+
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Nunito Sans', system-ui, -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+    --pad: 22px;      /* horizontale contentmarge */
+    --nav-offset: 56px; /* scroll-offset onder de sticky nav */
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0 auto;
+    max-width: 390px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    /* geen animaties in dit design: bewust geen scroll-behavior: smooth */
+  }
+  button { font-family: inherit; margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--terracotta); outline-offset: 2px; }
+
+  /* ---- fotoplaceholder (vervang door <img>) ----------------------------- */
+  .photo {
+    background:
+      repeating-linear-gradient(135deg, rgba(59,42,30,.07) 0 6px, rgba(59,42,30,0) 6px 12px),
+      var(--photo-fallback);
+    display: grid;
+    place-items: center;
+  }
+  .photo span {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .04em;
+    color: #9A7B5C;
+    text-align: center;
+    padding: 0 12px;
+  }
+
+  /* ---- hero ------------------------------------------------------------- */
+  .hero { position: relative; height: 296px; }
+  .hero .photo { position: absolute; inset: 0; }
+  .hero-scrim {
+    position: absolute; inset: auto 0 0 0; height: 170px; pointer-events: none;
+    background: linear-gradient(to top, rgba(45,28,18,.78), rgba(45,28,18,0));
+  }
+  .hero-text { position: absolute; left: var(--pad); right: var(--pad); bottom: 20px; pointer-events: none; }
+  .hero-title { font-family: var(--serif); font-size: 38px; line-height: 1.05; color: var(--cream); }
+  .hero-sub { margin-top: 6px; font-size: 14.5px; font-weight: 600; color: #F6DFC8; }
+
+  .lang {
+    position: absolute; top: 14px; right: 14px;
+    display: flex; gap: 4px; padding: 4px;
+    background: rgba(255,249,240,.94); border-radius: 999px;
+  }
+  .lang button {
+    border: 0; cursor: pointer; min-height: 44px; min-width: 52px; padding: 0 16px;
+    border-radius: 999px; font-size: 14px; font-weight: 700;
+    background: transparent; color: #6B4F3A;
+  }
+  .lang button[aria-pressed="true"] { background: var(--terracotta); color: var(--cream); font-weight: 800; }
+
+  /* ---- welkom + sticky nav --------------------------------------------- */
+  .welkom { padding: 20px var(--pad) 16px; }
+  .welkom p { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.5; }
+  .en-notice {
+    margin-top: 12px; font-size: 13.5px; font-weight: 600; line-height: 1.45;
+    color: var(--terracotta-text); background: var(--terracotta-tint);
+    border-radius: 12px; padding: 10px 12px;
+  }
+  .en-notice[hidden] { display: none; }
+
+  nav.sticky {
+    position: sticky; top: 0; z-index: 5;
+    background: rgba(255,249,240,.97);
+    border-bottom: 1px solid var(--border-nav);
+    padding: 10px 0;
+  }
+  .chips { display: flex; gap: 7px; overflow-x: auto; padding: 0 var(--pad); scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chips button {
+    flex: none; cursor: pointer; white-space: nowrap;
+    min-height: 44px; padding: 0 17px; border-radius: 999px;
+    font-size: 14.5px; font-weight: 700;
+    background: var(--surface); border: 1.5px solid var(--border); color: #6B4F3A;
+  }
+  .chips button[aria-current="true"] { background: var(--terracotta); border-color: var(--terracotta); color: var(--cream); }
+
+  /* ---- secties --------------------------------------------------------- */
+  section { padding: 4px var(--pad) 22px; }
+  section:first-of-type { padding-top: 24px; }
+  section:last-of-type { padding-bottom: 36px; }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: 25px; line-height: 1.15; margin: 0; }
+  .sub { margin-top: 4px; font-size: 13.5px; color: var(--ink-muted); }
+  .col { display: flex; flex-direction: column; }
+
+  /* hulp */
+  .host {
+    display: flex; align-items: center; gap: 14px; margin-top: 14px;
+    background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px; padding: 14px;
+  }
+  .host .avatar { flex: none; width: 64px; height: 64px; border-radius: 999px; overflow: hidden; }
+  .host p { flex: 1; margin: 0; font-size: 14.5px; line-height: 1.5; }
+  .host strong { font-weight: 800; }
+
+  .help-list { gap: 10px; margin-top: 12px; }
+  .help-card {
+    display: flex; align-items: center; min-height: 66px;
+    border-radius: 18px; padding: 14px 18px;
+  }
+  .help-card b { display: block; font-size: 16.5px; font-weight: 800; }
+  .help-card small { display: block; margin-top: 2px; font-size: 13.5px; }
+  .help-card.teal { background: var(--teal-tint); color: var(--teal); }
+  .help-card.teal small { color: #2E5B51; }
+  .help-card.saffron { background: var(--saffron-tint); color: #7A5514; }
+  .help-card.saffron small { color: #6F4C0F; }
+  .help-card.urgent { background: var(--terracotta-deep); color: #FFFFFF; }
+  .help-card.urgent small { color: #FBE7DF; }
+  /* zachte variant van de noodgevalkaart (prop emergencyProminent = false)
+  .help-card.urgent { background: var(--terracotta-tint); color: var(--terracotta-text); }
+  .help-card.urgent small { color: #8C4327; } */
+
+  /* wifi */
+  .wifi { margin-top: 14px; background: var(--teal); border-radius: 22px; padding: 20px; }
+  .wifi-label { font-size: 12.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--teal-label); }
+  .wifi-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 5px; }
+  .wifi-value { font-family: var(--mono); font-weight: 600; color: var(--cream); }
+  .wifi-value.net { font-size: 21px; }
+  .wifi-value.pw { font-size: 25px; }
+  .wifi hr { height: 1px; border: 0; background: var(--teal-line); margin: 16px 0; }
+  .copy {
+    flex: none; cursor: pointer; min-height: 44px; padding: 0 16px; border-radius: 999px;
+    font-size: 14.5px; font-weight: 700;
+  }
+  .copy.ghost { background: transparent; border: 1.5px solid var(--teal-border); color: var(--cream); }
+  .copy.solid { background: var(--saffron); border: 0; color: var(--ink); font-weight: 800; }
+  .copied { margin-top: 13px; font-size: 13.5px; font-weight: 700; color: var(--saffron); }
+  .copied[hidden] { display: none; }
+  .wifi-foot { margin-top: 11px; font-size: 13.5px; color: var(--ink-muted); }
+
+  /* aankomst */
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .tile { border-radius: 18px; padding: 14px 16px; }
+  .tile.in { background: var(--saffron-tint); }
+  .tile.in .tile-label { color: #96702A; }
+  .tile.out { background: var(--teal-tint); }
+  .tile.out .tile-label { color: #3F7368; }
+  .tile-label { font-size: 13.5px; font-weight: 700; }
+  .tile-value { margin-top: 3px; font-size: 20px; font-weight: 800; }
+  .blocks { gap: 14px; margin-top: 16px; }
+  .blocks h3 { margin: 0; font-size: 16px; font-weight: 800; }
+  .blocks p { margin: 3px 0 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); }
+  .blocks code { font-family: var(--mono); font-weight: 600; color: var(--ink); }
+
+  /* in huis */
+  .pool { margin-top: 14px; height: 150px; border-radius: 20px; overflow: hidden; }
+  .acc-list { gap: 10px; margin-top: 14px; }
+  .acc { background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px; overflow: hidden; }
+  .acc > button {
+    display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 12px;
+    min-height: 58px; padding: 14px 18px; background: transparent; border: 0; cursor: pointer;
+    text-align: left; color: var(--ink);
+  }
+  .acc > button > span:first-child { font-size: 16.5px; font-weight: 800; }
+  .acc .sign { font-family: var(--mono); font-size: 19px; color: #B08A63; }
+  .acc-body { padding: 0 18px 16px; font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); }
+  .acc-body[hidden] { display: none; }
+
+  /* regels */
+  .rules { gap: 9px; margin-top: 14px; }
+  .rules div {
+    background: var(--saffron-tint); border-radius: 14px; padding: 13px 16px;
+    font-size: 14.5px; font-weight: 600; line-height: 1.45;
+  }
+
+  /* omgeving */
+  .spots { gap: 14px; margin-top: 14px; }
+  .spot { background: var(--surface); border: 1.5px solid var(--border); border-radius: 20px; overflow: hidden; }
+  .spot .photo { height: 132px; }
+  .spot-body { padding: 14px 16px 16px; }
+  .spot-body h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 21px; }
+  .spot-body p { margin: 6px 0 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); }
+
+  /* vertrek */
+  .tasks { gap: 9px; margin-top: 14px; }
+  .task {
+    display: flex; align-items: center; gap: 13px; width: 100%; min-height: 52px;
+    padding: 11px 15px; border-radius: 14px; cursor: pointer;
+    font-size: 14.5px; font-weight: 600; line-height: 1.4; text-align: left;
+    background: var(--surface); border: 1.5px solid var(--border); color: var(--ink);
+  }
+  .task .box {
+    flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 999px;
+    border: 1.5px solid #DCC7AE; font-size: 14px; font-weight: 800; color: #FFFFFF;
+  }
+  .task[aria-pressed="true"] { background: var(--terracotta-tint); border-color: var(--terracotta); color: var(--terracotta-text); }
+  .task[aria-pressed="true"] .box { background: var(--terracotta); border-color: var(--terracotta); }
+  .outro {
+    margin-top: 22px; padding: 16px 18px; background: var(--teal-tint); border-radius: 18px;
+    font-size: 14.5px; line-height: 1.5; color: var(--teal);
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="photo"><span>FOTO — terras met uitzicht<br>390 × 296</span></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-text">
+    <div class="hero-title">casSonovi</div>
+    <div class="hero-sub">Noord, Aruba · 12 minuten van Eagle Beach</div>
+  </div>
+  <div class="lang">
+    <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<div class="welkom">
+  <p>Welkom. Alles wat je nodig hebt staat hieronder — wifi, tijden, en waar je lekker eet.</p>
+  <div class="en-notice" id="en-notice" hidden>De Engelse versie is in deze mock-up nog niet uitgewerkt.</div>
+</div>
+
+<nav class="sticky">
+  <div class="chips" id="chips">
+    <button type="button" data-goto="hulp" aria-current="true">Hulp</button>
+    <button type="button" data-goto="wifi">Wifi</button>
+    <button type="button" data-goto="aankomst">Aankomst</button>
+    <button type="button" data-goto="inhuis">In huis</button>
+    <button type="button" data-goto="regels">Regels</button>
+    <button type="button" data-goto="omgeving">Omgeving</button>
+    <button type="button" data-goto="vertrek">Vertrek</button>
+  </div>
+</nav>
+
+<section id="hulp">
+  <h2>Hulp nodig?</h2>
+  <div class="host">
+    <div class="avatar photo"><span>FOTO<br>host</span></div>
+    <p><strong>Norvin</strong> — je host. Bereikbaar van 08:00 tot 22:00, meestal binnen een uur antwoord.</p>
+  </div>
+  <div class="col help-list">
+    <a class="help-card teal" href="https://wa.me/2975924180">
+      <span><b>Iets is stuk</b><small>Stuur een foto via WhatsApp</small></span>
+    </a>
+    <a class="help-card saffron" href="https://wa.me/2975924180">
+      <span><b>Vraag over je verblijf</b><small>WhatsApp of bel +297 592 4180</small></span>
+    </a>
+    <a class="help-card urgent" href="tel:911">
+      <span><b>Noodgeval — bel 911</b><small>Politie, ambulance en brandweer</small></span>
+    </a>
+  </div>
+</section>
+
+<section id="wifi">
+  <h2>Wifi</h2>
+  <div class="wifi">
+    <div class="wifi-label">Netwerk</div>
+    <div class="wifi-row">
+      <div class="wifi-value net" id="wifi-net">casSonovi</div>
+      <button class="copy ghost" type="button" data-copy="wifi-net">Kopieer</button>
+    </div>
+    <hr>
+    <div class="wifi-label">Wachtwoord</div>
+    <div class="wifi-row">
+      <div class="wifi-value pw" id="wifi-pw">welkom2026</div>
+      <button class="copy solid" type="button" data-copy="wifi-pw">Kopieer</button>
+    </div>
+    <div class="copied" id="copied" hidden>Gekopieerd naar het klembord.</div>
+  </div>
+  <div class="wifi-foot">Eén netwerk in het hele appartement, ook op het terras.</div>
+</section>
+
+<section id="aankomst">
+  <h2>Aankomst &amp; vertrek</h2>
+  <div class="tiles">
+    <div class="tile in">
+      <div class="tile-label">Inchecken</div>
+      <div class="tile-value">12:00–01:00</div>
+    </div>
+    <div class="tile out">
+      <div class="tile-label">Uitchecken</div>
+      <div class="tile-value">voor 15:00</div>
+    </div>
+  </div>
+  <div class="col blocks">
+    <div>
+      <h3>Sleutel</h3>
+      <p>Sleutelkastje rechts van de voordeur, code <code>2814</code>. Draai de knop na sluiten door.</p>
+    </div>
+    <div>
+      <h3>Parkeren</h3>
+      <p>Eigen plek links van het hek. Gratis, geen registratie nodig.</p>
+    </div>
+    <div>
+      <h3>Later aankomen?</h3>
+      <p>Geen probleem, laat het even weten zodat het licht aan staat.</p>
+    </div>
+  </div>
+</section>
+
+<section id="inhuis">
+  <h2>In huis</h2>
+  <div class="pool photo"><span>FOTO — zwembad<br>390 × 150</span></div>
+  <div class="col acc-list" id="acc-list">
+    <div class="acc">
+      <button type="button" aria-expanded="false"><span>Zwembad</span><span class="sign">+</span></button>
+      <div class="acc-body" hidden>Open van 08:00 tot 22:00, gedeeld met de bovenwoning. Handdoeken liggen in de badkamerkast — badlakens graag niet mee naar het strand. Geen glas op de rand.</div>
+    </div>
+    <div class="acc">
+      <button type="button" aria-expanded="false"><span>Keuken</span><span class="sign">+</span></button>
+      <div class="acc-body" hidden>Kookplaat, combi-oven en waterkoker. Koffie: filters en gemalen koffie in de bovenste lade links. Peper, zout en olie mag je gebruiken.</div>
+    </div>
+    <div class="acc">
+      <button type="button" aria-expanded="false"><span>Airco</span><span class="sign">+</span></button>
+      <div class="acc-body" hidden>Slaapkamer en woonkamer regel je apart. 22 tot 24 graden werkt het best; houd deuren en ramen dan dicht. Zet hem uit als je weggaat.</div>
+    </div>
+    <div class="acc">
+      <button type="button" aria-expanded="false"><span>Wasgoed</span><span class="sign">+</span></button>
+      <div class="acc-body" hidden>Wasmachine in de berging, wasmiddel staat ernaast. Programma 3 is kort. Droogrek op het terras, niet over de balustrade hangen.</div>
+    </div>
+    <div class="acc">
+      <button type="button" aria-expanded="false"><span>Tv en apparaten</span><span class="sign">+</span></button>
+      <div class="acc-body" hidden>Tv staat op HDMI 1 voor streaming; de afstandsbediening ligt in de lade onder de tv. Ventilator in de slaapkamerkast. Föhn in de badkamerlade.</div>
+    </div>
+  </div>
+</section>
+
+<section id="regels">
+  <h2>Huisregels</h2>
+  <div class="col rules">
+    <div>Maximaal 2 gasten. Bezoek welkom, blijven slapen niet.</div>
+    <div>Rust tussen 22:00 en 08:00 — de buren wonen dicht op ons.</div>
+    <div>Binnen niet roken. Op het terras mag, asbak staat op tafel.</div>
+    <div>Geen huisdieren.</div>
+  </div>
+</section>
+
+<section id="omgeving">
+  <h2>Ontdek de omgeving</h2>
+  <div class="col spots">
+    <div class="spot">
+      <div class="photo"><span>FOTO — strand<br>390 × 132</span></div>
+      <div class="spot-body">
+        <h3>Strand</h3>
+        <p>Eagle Beach — 10 minuten rijden, brede baai, palapa's vroeg bezet.<br>Arashi Beach — rustiger, goed snorkelen bij de rotsen links.</p>
+      </div>
+    </div>
+    <div class="spot">
+      <div class="photo"><span>FOTO — supermarkt<br>390 × 132</span></div>
+      <div class="spot-body">
+        <h3>Supermarkt</h3>
+        <p>Super Food Plaza — groot, dagelijks tot 21:00, 6 minuten rijden.<br>Ling &amp; Sons — kleiner, goede visafdeling.</p>
+      </div>
+    </div>
+    <div class="spot">
+      <div class="photo"><span>FOTO — restaurant<br>390 × 132</span></div>
+      <div class="spot-body">
+        <h3>Eten</h3>
+        <p>Zeerovers — verse vis aan de haven, alleen cash, geen reservering.<br>Gasparito — Arubaanse keuken, 's avonds reserveren.<br>Eduardo's Beach Shack — ontbijt en smoothies aan het strand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vertrek">
+  <h2>Voordat je vertrekt</h2>
+  <div class="sub">Tik af wat je hebt gedaan.</div>
+  <div class="col tasks" id="tasks">
+    <button class="task" type="button" aria-pressed="false"><span class="box"></span><span>Afwas gedaan of vaatwasser aan</span></button>
+    <button class="task" type="button" aria-pressed="false"><span class="box"></span><span>Afval in de container bij het hek</span></button>
+    <button class="task" type="button" aria-pressed="false"><span class="box"></span><span>Airco, ventilator en lichten uit</span></button>
+    <button class="task" type="button" aria-pressed="false"><span class="box"></span><span>Ramen en terrasdeur dicht</span></button>
+    <button class="task" type="button" aria-pressed="false"><span class="box"></span><span>Sleutel terug in het kastje</span></button>
+  </div>
+  <div class="outro">Fijne reis terug — en kom gerust weer langs. Laat weten wat we beter kunnen doen.</div>
+</section>
+
+<script>
+(function () {
+  var NAV_OFFSET = 56;
+
+  /* nav: sprong naar sectie (instant, geen smooth scroll) */
+  var chips = Array.prototype.slice.call(document.querySelectorAll('#chips button'));
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var target = document.getElementById(chip.dataset.goto);
+      if (target) window.scrollTo(0, target.offsetTop - NAV_OFFSET);
+    });
+  });
+
+  /* scroll-spy: laatste sectie boven scrollTop + 90 is actief */
+  var sections = chips.map(function (c) { return document.getElementById(c.dataset.goto); });
+  function spy() {
+    var y = window.scrollY + 90, active = 0;
+    sections.forEach(function (sec, i) { if (sec && sec.offsetTop <= y) active = i; });
+    chips.forEach(function (c, i) {
+      if (i === active) c.setAttribute('aria-current', 'true'); else c.removeAttribute('aria-current');
+    });
+  }
+  window.addEventListener('scroll', spy, { passive: true });
+  spy();
+
+  /* accordeons: meerdere mogen tegelijk open, geen animatie */
+  document.querySelectorAll('#acc-list .acc').forEach(function (acc) {
+    var btn = acc.querySelector('button');
+    var body = acc.querySelector('.acc-body');
+    var sign = acc.querySelector('.sign');
+    btn.addEventListener('click', function () {
+      var open = body.hidden;
+      body.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      sign.textContent = open ? '\u2013' : '+';
+    });
+  });
+
+  /* kopiëren met fallback voor oudere browsers */
+  var copied = document.getElementById('copied'), timer;
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'absolute'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    return Promise.resolve();
+  }
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var src = document.getElementById(btn.dataset.copy);
+      copyText(src ? src.textContent.trim() : '');
+      copied.hidden = false;
+      clearTimeout(timer);
+      timer = setTimeout(function () { copied.hidden = true; }, 2500);
+    });
+  });
+
+  /* vertrekchecklist — in productie in localStorage bewaren per verblijf */
+  document.querySelectorAll('#tasks .task').forEach(function (task, i) {
+    task.addEventListener('click', function () {
+      var on = task.getAttribute('aria-pressed') === 'true';
+      task.setAttribute('aria-pressed', String(!on));
+      task.querySelector('.box').textContent = on ? '' : '\u2713';
+    });
+  });
+
+  /* taalwissel — alleen state in deze mock; in productie NL/EN content wisselen */
+  var notice = document.getElementById('en-notice');
+  document.querySelectorAll('.lang button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.lang button').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      notice.hidden = btn.dataset.lang !== 'en';
+    });
+  });
+})();
+</script>
+</body>
+</html>

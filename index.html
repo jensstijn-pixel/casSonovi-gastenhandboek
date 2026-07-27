@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>casSonovi — gastenhandboek</title>
+<meta name="description" content="Digitaal gastenhandboek van casSonovi in Noord, Aruba. Wifi, aankomst, huisregels en tips voor de omgeving.">
+<meta name="theme-color" content="#FFF9F0">
+<meta name="robots" content="noindex">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="casSonovi — gastenhandboek">
+<meta property="og:description" content="Alles wat je nodig hebt tijdens je verblijf: wifi, tijden, huisregels en tips voor de omgeving.">
+<meta property="og:image" content="assets/img/hero-terras.jpg">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23D9603B'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FFF9F0' text-anchor='middle'%3Ec%3C/text%3E%3C/svg%3E">
+
+<link rel="preload" href="assets/fonts/nunito-sans-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/dm-serif-display-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/img/hero-terras.jpg" as="image">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="photo photo--hero">
+    <img src="assets/img/hero-terras.jpg" width="1020" height="593" alt="Het terras van casSonovi met gemetselde bar, zithoek en openslaande deuren naar het appartement." fetchpriority="high" decoding="async">
+  </div>
+  <div class="hero-scrim"></div>
+  <div class="hero-text">
+    <h1 class="hero-title">casSonovi</h1>
+    <div class="hero-sub">Noord, Aruba · 12 minuten van Eagle Beach</div>
+  </div>
+  <div class="lang" role="group" aria-label="Taal">
+    <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<div class="welkom">
+  <p>Welkom. Alles wat je nodig hebt staat hieronder — wifi, tijden, en waar je lekker eet.</p>
+  <div class="en-notice" id="en-notice" hidden>De Engelse versie is in deze mock-up nog niet uitgewerkt.</div>
+</div>
+
+<nav class="sticky" aria-label="Secties">
+  <div class="chips" id="chips">
+    <button type="button" data-goto="hulp" aria-current="true">Hulp</button>
+    <button type="button" data-goto="wifi">Wifi</button>
+    <button type="button" data-goto="aankomst">Aankomst</button>
+    <button type="button" data-goto="inhuis">In huis</button>
+    <button type="button" data-goto="regels">Regels</button>
+    <button type="button" data-goto="omgeving">Omgeving</button>
+    <button type="button" data-goto="vertrek">Vertrek</button>
+  </div>
+</nav>
+
+<section id="hulp" aria-labelledby="kop-hulp">
+  <h2 id="kop-hulp">Hulp nodig?</h2>
+  <div class="host">
+    <div class="avatar photo photo--host">
+      <img src="assets/img/host-norvin.jpg" width="160" height="186" alt="Norvin, je host." loading="lazy" decoding="async">
+    </div>
+    <p><strong>Norvin</strong> — je host. Bereikbaar van 08:00 tot 22:00, meestal binnen een uur antwoord.</p>
+  </div>
+  <!-- PLACEHOLDER: telefoonnummer +297 592 4180 is verzonnen. Vervang op 3 plekken hieronder. -->
+  <div class="col help-list">
+    <a class="help-card teal" href="https://wa.me/2975924180">
+      <span><b>Iets is stuk</b><small>Stuur een foto via WhatsApp</small></span>
+    </a>
+    <a class="help-card saffron" href="https://wa.me/2975924180">
+      <span><b>Vraag over je verblijf</b><small>WhatsApp of bel +297 592 4180</small></span>
+    </a>
+    <a class="help-card urgent" href="tel:911">
+      <span><b>Noodgeval — bel 911</b><small>Politie, ambulance en brandweer</small></span>
+    </a>
+  </div>
+</section>
+
+<section id="wifi" aria-labelledby="kop-wifi">
+  <h2 id="kop-wifi">Wifi</h2>
+  <!-- PLACEHOLDER: netwerknaam en wachtwoord zijn verzonnen. -->
+  <div class="wifi">
+    <div class="wifi-label" id="lbl-net">Netwerk</div>
+    <div class="wifi-row">
+      <div class="wifi-value net" id="wifi-net">casSonovi</div>
+      <button class="copy ghost" type="button" data-copy="wifi-net" aria-describedby="lbl-net">Kopieer</button>
+    </div>
+    <hr>
+    <div class="wifi-label" id="lbl-pw">Wachtwoord</div>
+    <div class="wifi-row">
+      <div class="wifi-value pw" id="wifi-pw">welkom2026</div>
+      <button class="copy solid" type="button" data-copy="wifi-pw" aria-describedby="lbl-pw">Kopieer</button>
+    </div>
+    <div class="copied" id="copied" role="status" hidden>Gekopieerd naar het klembord.</div>
+  </div>
+  <div class="wifi-foot">Eén netwerk in het hele appartement, ook op het terras.</div>
+</section>
+
+<section id="aankomst" aria-labelledby="kop-aankomst">
+  <h2 id="kop-aankomst">Aankomst &amp; vertrek</h2>
+  <!-- PLACEHOLDER: tijden overgenomen uit de briefing, nog te bevestigen. -->
+  <div class="tiles">
+    <div class="tile in">
+      <div class="tile-label">Inchecken</div>
+      <div class="tile-value">12:00–01:00</div>
+    </div>
+    <div class="tile out">
+      <div class="tile-label">Uitchecken</div>
+      <div class="tile-value">voor 15:00</div>
+    </div>
+  </div>
+  <div class="col blocks">
+    <div>
+      <h3>Sleutel</h3>
+      <!-- PLACEHOLDER: sleutelkastcode 2814 is verzonnen. -->
+      <p>Sleutelkastje rechts van de voordeur, code <code>2814</code>. Draai de knop na sluiten door.</p>
+    </div>
+    <div>
+      <h3>Parkeren</h3>
+      <p>Eigen plek links van het hek. Gratis, geen registratie nodig.</p>
+    </div>
+    <div>
+      <h3>Later aankomen?</h3>
+      <p>Geen probleem, laat het even weten zodat het licht aan staat.</p>
+    </div>
+  </div>
+</section>
+
+<section id="inhuis" aria-labelledby="kop-inhuis">
+  <h2 id="kop-inhuis">In huis</h2>
+  <div class="pool photo photo--zwembad">
+    <img src="assets/img/zwembad.jpg" width="780" height="615" alt="Het zwembad van casSonovi met terras, ligstoelen en zitje aan het water." loading="lazy" decoding="async">
+  </div>
+  <div class="col acc-list" id="acc-list">
+    <div class="acc">
+      <button type="button" aria-expanded="false" aria-controls="acc-zwembad"><span>Zwembad</span><span class="sign" aria-hidden="true">+</span></button>
+      <div class="acc-body" id="acc-zwembad" hidden>Open van 08:00 tot 22:00, gedeeld met de bovenwoning. Handdoeken liggen in de badkamerkast — badlakens graag niet mee naar het strand. Geen glas op de rand.</div>
+    </div>
+    <div class="acc">
+      <button type="button" aria-expanded="false" aria-controls="acc-keuken"><span>Keuken</span><span class="sign" aria-hidden="true">+</span></button>
+      <div class="acc-body" id="acc-keuken" hidden>Kookplaat, combi-oven en waterkoker. Koffie: filters en gemalen koffie in de bovenste lade links. Peper, zout en olie mag je gebruiken.</div>
+    </div>
+    <div class="acc">
+      <button type="button" aria-expanded="false" aria-controls="acc-airco"><span>Airco</span><span class="sign" aria-hidden="true">+</span></button>
+      <div class="acc-body" id="acc-airco" hidden>Slaapkamer en woonkamer regel je apart. 22 tot 24 graden werkt het best; houd deuren en ramen dan dicht. Zet hem uit als je weggaat.</div>
+    </div>
+    <div class="acc">
+      <button type="button" aria-expanded="false" aria-controls="acc-wasgoed"><span>Wasgoed</span><span class="sign" aria-hidden="true">+</span></button>
+      <div class="acc-body" id="acc-wasgoed" hidden>Wasmachine in de berging, wasmiddel staat ernaast. Programma 3 is kort. Droogrek op het terras, niet over de balustrade hangen.</div>
+    </div>
+    <div class="acc">
+      <button type="button" aria-expanded="false" aria-controls="acc-apparaten"><span>Tv en apparaten</span><span class="sign" aria-hidden="true">+</span></button>
+      <div class="acc-body" id="acc-apparaten" hidden>Tv staat op HDMI 1 voor streaming; de afstandsbediening ligt in de lade onder de tv. Ventilator in de slaapkamerkast. Föhn in de badkamerlade.</div>
+    </div>
+  </div>
+</section>
+
+<section id="regels" aria-labelledby="kop-regels">
+  <h2 id="kop-regels">Huisregels</h2>
+  <ul class="col rules">
+    <li>Maximaal 2 gasten. Bezoek welkom, blijven slapen niet.</li>
+    <li>Rust tussen 22:00 en 08:00 — de buren wonen dicht op ons.</li>
+    <li>Binnen niet roken. Op het terras mag, asbak staat op tafel.</li>
+    <li>Geen huisdieren.</li>
+  </ul>
+</section>
+
+<section id="omgeving" aria-labelledby="kop-omgeving">
+  <h2 id="kop-omgeving">Ontdek de omgeving</h2>
+  <!-- PLACEHOLDER: plausibele Aruba-suggesties, nog te bevestigen door de host. -->
+  <div class="col spots">
+    <div class="spot">
+      <div class="photo photo--strand">
+        <img src="assets/img/strand-eagle-beach.jpg" width="780" height="681" alt="Eagle Beach: breed wit strand met palmbomen, palapa's en turquoise zee." loading="lazy" decoding="async">
+      </div>
+      <div class="spot-body">
+        <h3>Strand</h3>
+        <p>Eagle Beach — 10 minuten rijden, brede baai, palapa's vroeg bezet.<br>Arashi Beach — rustiger, goed snorkelen bij de rotsen links.</p>
+      </div>
+    </div>
+    <div class="spot">
+      <div class="photo photo--supermarkt">
+        <img src="assets/img/supermarkt-super-food.jpg" width="706" height="396" alt="De ingang van supermarkt Super Food Plaza met palmbomen ervoor." loading="lazy" decoding="async">
+      </div>
+      <div class="spot-body">
+        <h3>Supermarkt</h3>
+        <p>Super Food Plaza — groot, dagelijks tot 21:00, 6 minuten rijden.<br>Ling &amp; Sons — kleiner, goede visafdeling.</p>
+      </div>
+    </div>
+    <div class="spot">
+      <div class="photo photo--eten">
+        <img src="assets/img/eten-gasparito.jpg" width="644" height="556" alt="Restaurant Gasparito bij avond, met verlichte gevel en het bord Restaurant-Art Gallery." loading="lazy" decoding="async">
+      </div>
+      <div class="spot-body">
+        <h3>Eten</h3>
+        <p>Zeerovers — verse vis aan de haven, alleen cash, geen reservering.<br>Gasparito — Arubaanse keuken, 's avonds reserveren.<br>Eduardo's Beach Shack — ontbijt en smoothies aan het strand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vertrek" aria-labelledby="kop-vertrek">
+  <h2 id="kop-vertrek">Voordat je vertrekt</h2>
+  <div class="sub">Tik af wat je hebt gedaan.</div>
+  <div class="col tasks" id="tasks">
+    <button class="task" type="button" aria-pressed="false" data-task="0"><span class="box" aria-hidden="true"></span><span>Afwas gedaan of vaatwasser aan</span></button>
+    <button class="task" type="button" aria-pressed="false" data-task="1"><span class="box" aria-hidden="true"></span><span>Afval in de container bij het hek</span></button>
+    <button class="task" type="button" aria-pressed="false" data-task="2"><span class="box" aria-hidden="true"></span><span>Airco, ventilator en lichten uit</span></button>
+    <button class="task" type="button" aria-pressed="false" data-task="3"><span class="box" aria-hidden="true"></span><span>Ramen en terrasdeur dicht</span></button>
+    <button class="task" type="button" aria-pressed="false" data-task="4"><span class="box" aria-hidden="true"></span><span>Sleutel terug in het kastje</span></button>
+  </div>
+  <div class="outro">Fijne reis terug — en kom gerust weer langs. Laat weten wat we beter kunnen doen.</div>
+</section>
+
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>
