@@ -64,6 +64,15 @@ Projectgeheugen. Nieuwste bovenaan.
 5. Bevestiging van de tips voor strand, supermarkt en eten.
 6. Engelse vertaling — de EN-knop werkt al, maar toont nu een melding.
 
+**Hoe het draait**
+
+- Lokaal: `python3 -m http.server 4321` in de projectmap → <http://127.0.0.1:4321>
+- Repo: <https://github.com/jensstijn-pixel/casSonovi-gastenhandboek> (publiek)
+- Live: <https://jensstijn-pixel.github.io/casSonovi-gastenhandboek/> (GitHub Pages, branch `main`,
+  root). Push naar `main` = automatisch live, build duurt ~1 minuut.
+- De pagina staat op `noindex`: publiek bereikbaar, maar niet vindbaar via Google. Jens heeft
+  bewust gekozen voor een publieke repo zodat Pages werkt en de link deelbaar is.
+
 **Ideeën voor later**
 
 - QR-code genereren zodra er een definitieve URL is.
