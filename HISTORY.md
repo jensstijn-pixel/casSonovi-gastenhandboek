@@ -64,6 +64,25 @@ Projectgeheugen. Nieuwste bovenaan.
 5. Bevestiging van de tips voor strand, supermarkt en eten.
 6. Engelse vertaling — de EN-knop werkt al, maar toont nu een melding.
 
+**Valkuilen — bespaart de volgende sessie tijd**
+
+- **Geen WebP-tool op deze Mac.** `cwebp`, ImageMagick en `magick` ontbreken, en `sips` kan
+  wél JPEG maar géén WebP (`-s format webp` faalt). Wie WebP wil: eerst `brew install webp`.
+- **`sips` kan alleen gecentreerd bijsnijden**, geen offset. Daarom zijn de foto's alleen
+  geschaald en wordt de uitsnede in CSS bepaald met `object-position` per foto.
+- **Google Fonts levert Nunito Sans als één variable-fontbestand** voor alle gewichten; de
+  css2-API geeft dan vier identieke URL's terug. In `fonts.css` staat het daarom als één
+  `@font-face` met `font-weight: 400 800`, niet als vier losse blokken.
+- **De nav is 64px hoog, de scroll-offset uit de handoff is 56px.** Dat is geen fout: de
+  sectiekop begint 4px onder de sectietop, dus er wordt niets zichtbaars afgesneden. Niet
+  "fixen" zonder eerst te kijken.
+- **Chrome laadt `loading="lazy"`-foto's niet in een achtergrondtab.** Bij het testen via de
+  Chrome-extensie lijken foto's dan kapot (`naturalWidth === 0`) terwijl ze prima zijn. Een
+  screenshot forceert een paint; dáárna pas meten.
+- **Geen `requestAnimationFrame` of lange `setTimeout` in geëvalueerde JS** via de
+  Chrome-extensie: die vuren niet in een achtergrondtab en de call loopt in een timeout van
+  45s. Klik in de ene call, lees de state in een volgende.
+
 **Hoe het draait**
 
 - Lokaal: `python3 -m http.server 4321` in de projectmap → <http://127.0.0.1:4321>
