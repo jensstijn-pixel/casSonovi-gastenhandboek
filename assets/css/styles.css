@@ -69,6 +69,49 @@ img { display: block; max-width: 100%; }
    schalen en verschuiven we het beeld, zodat het gezicht in de cirkel gecentreerd staat. */
 .photo--host img { width: 86px; height: 100px; margin: -2px 0 0 -9px; }
 
+/* ---- toegangspoort ------------------------------------------------------
+   Slot voor de code die naast de QR-code in het huis hangt. `locked` staat al
+   in de HTML, zodat het handboek nooit opflitst voordat app.js geladen is.
+   Geen animaties, net als de rest van dit design.                          */
+body.locked #handboek { display: none; }
+body:not(.locked) #gate { display: none; }
+
+/* Zelfde compositie als de hero: fotostrook met de naam erin, daaronder crème.
+   Een schermvullende foto zou in deze smalle kolom veel te ver inzoomen. */
+#gate { position: relative; min-height: 100svh; background: var(--bg); }
+.gate-photo { position: relative; height: 296px; }
+.gate-scrim {
+  position: absolute; inset: auto 0 0 0; height: 170px; pointer-events: none;
+  background: linear-gradient(to top, rgba(45,28,18,.78), rgba(45,28,18,0));
+}
+.gate-title {
+  position: absolute; left: var(--pad); right: var(--pad); bottom: 20px; pointer-events: none;
+  font-family: var(--serif); font-size: 38px; line-height: 1.05; color: var(--cream);
+}
+.gate-inner { padding: 22px var(--pad) 32px; }
+.gate-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 22px; padding: 22px 20px; }
+.gate-label { display: block; font-size: 15.5px; font-weight: 700; line-height: 1.45; }
+.gate-input {
+  display: block; width: 100%; margin-top: 16px; min-height: 62px; padding: 0 12px;
+  border: 1.5px solid var(--border); border-radius: 16px; background: var(--bg);
+  font-family: var(--mono); font-weight: 600; font-size: 30px; letter-spacing: .28em;
+  text-align: center; text-indent: .28em; /* letterspacing niet rechts laten uitlopen */
+  color: var(--ink);
+}
+.gate-input::placeholder { color: #C7AC90; letter-spacing: .28em; }
+.gate-btn {
+  display: block; width: 100%; margin-top: 12px; min-height: 54px; cursor: pointer;
+  border: 0; border-radius: 999px; background: var(--terracotta); color: var(--cream);
+  font-size: 16.5px; font-weight: 800;
+}
+.gate-error {
+  margin-top: 14px; font-size: 13.5px; font-weight: 600; line-height: 1.45;
+  color: var(--terracotta-text); background: var(--terracotta-tint);
+  border-radius: 12px; padding: 10px 12px;
+}
+.gate-error[hidden] { display: none; }
+.gate-help { margin-top: 14px; text-align: center; font-size: 13.5px; color: var(--ink-muted); }
+
 /* ---- hero -------------------------------------------------------------- */
 .hero { position: relative; height: 296px; }
 .hero .photo { position: absolute; inset: 0; }
@@ -252,4 +295,9 @@ body.soft-emergency .help-card.urgent small { color: #8C4327; }
   }
   .hero { border-radius: 28px 28px 0 0; overflow: hidden; }
   section:last-of-type { padding-bottom: 44px; }
+  /* het slot vult hetzelfde presentatieframe als het handboek */
+  #gate {
+    min-height: min(800px, calc(100svh - 64px));
+    border-radius: 28px; overflow: hidden;
+  }
 }

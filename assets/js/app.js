@@ -11,6 +11,12 @@
   var COPIED_MS  = 2500;        // hoe lang de kopieerbevestiging blijft staan
   var STORE_TASKS = 'casSonovi.vertrek';
   var STORE_LANG  = 'casSonovi.taal';
+  var STORE_ACCESS = 'casSonovi.toegang';
+
+  /* PLACEHOLDER: mock-upcode. De echte code komt van Norvin en hangt naast de QR-code.
+     Dit is een drempel tegen per ongeluk delen, geen echte beveiliging: bij een statische
+     site staat de code onvermijdelijk in de broncode. */
+  var CODE = '1234';
 
   /* localStorage kan geblokkeerd zijn (privémodus). Nooit de pagina laten breken. */
   function load(key) {
@@ -149,6 +155,49 @@
 
   var savedLang = load(STORE_LANG);
   if (savedLang === 'en') setLang('en');
+
+  /* ---- toegangspoort -----------------------------------------------------
+     Het handboek is verborgen tot de code klopt. Eenmaal open blijft het open
+     op dit toestel, net als de checklist en de taalkeuze.                    */
+  var gateForm  = document.getElementById('gate-form');
+  var gateInput = document.getElementById('gate-code');
+  var gateError = document.getElementById('gate-error');
+
+  function unlock() {
+    document.body.classList.remove('locked');
+    window.scrollTo(0, 0);
+    /* Zolang het handboek verborgen was, is offsetTop van elke sectie 0 en klopt de
+       actieve chip niet. Daarom hier opnieuw meten. */
+    spy();
+  }
+
+  function tryCode() {
+    if (gateInput.value.replace(/\s/g, '') !== CODE) {
+      gateError.hidden = false;
+      gateInput.value = '';
+      gateInput.focus();
+      return;
+    }
+    gateError.hidden = true;
+    save(STORE_ACCESS, '1');
+    unlock();
+  }
+
+  if (gateForm) {
+    gateForm.addEventListener('submit', function (e) { e.preventDefault(); tryCode(); });
+
+    gateInput.addEventListener('input', function () {
+      /* alleen cijfers, en zodra er vier staan meteen controleren — scheelt een tik */
+      var digits = gateInput.value.replace(/\D/g, '').slice(0, 4);
+      if (digits !== gateInput.value) gateInput.value = digits;
+      if (!gateError.hidden && digits.length < 4) gateError.hidden = true;
+      if (digits.length === 4) tryCode();
+    });
+
+    if (load(STORE_ACCESS) === '1') unlock();
+  } else {
+    document.body.classList.remove('locked');   /* geen poort in de HTML: nooit dichtblijven */
+  }
 
   spy();
 })();

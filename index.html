@@ -20,8 +20,39 @@
 <link rel="preload" href="assets/img/hero-terras.jpg" as="image">
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/styles.css">
+
+<!-- Zonder JS kan het slot niet open. De handoff eist dat hulp en wifi ook dan werken
+     (een gast moet 911 kunnen bellen), dus valt de code weg en staat het handboek open. -->
+<noscript><style>
+  #gate { display: none !important; }
+  body.locked #handboek { display: block !important; }
+</style></noscript>
 </head>
-<body>
+<body class="locked">
+
+<!-- PLACEHOLDER: toegangscode 1234 is voor de mock-up. Staat in assets/js/app.js.
+     Dit is een drempel, geen echte beveiliging: bij een statische site staat de code
+     onvermijdelijk in de broncode. -->
+<div id="gate">
+  <div class="photo photo--hero gate-photo">
+    <img src="assets/img/hero-terras.jpg" width="1020" height="593" alt="" decoding="async">
+    <div class="gate-scrim"></div>
+    <div class="gate-title">casSonovi</div>
+  </div>
+  <div class="gate-inner">
+    <form class="gate-card" id="gate-form" novalidate>
+      <label class="gate-label" for="gate-code">Vul de code in die naast de QR-code hangt.</label>
+      <input class="gate-input" id="gate-code" name="code" type="text" inputmode="numeric"
+             pattern="[0-9]*" maxlength="4" autocomplete="off" autocapitalize="off"
+             spellcheck="false" placeholder="––––" aria-describedby="gate-error" autofocus>
+      <button class="gate-btn" type="submit">Open handboek</button>
+      <div class="gate-error" id="gate-error" role="status" hidden>Die code klopt niet. Kijk op het kaartje naast de QR-code.</div>
+    </form>
+    <div class="gate-help">Code kwijt? Vraag hem even aan Norvin.</div>
+  </div>
+</div>
+
+<main id="handboek">
 
 <header class="hero">
   <div class="photo photo--hero">
@@ -212,6 +243,8 @@
   </div>
   <div class="outro">Fijne reis terug — en kom gerust weer langs. Laat weten wat we beter kunnen doen.</div>
 </section>
+
+</main>
 
 <script src="assets/js/app.js" defer></script>
 </body>

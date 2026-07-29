@@ -5,6 +5,14 @@
     "ondertitel": "Noord, Aruba · 12 minuten van Eagle Beach",
     "taal": "nl"
   },
+  "toegang": {
+    "titel": "casSonovi",
+    "uitleg": "Vul de code in die naast de QR-code hangt.",
+    "knop": "Open handboek",
+    "fout": "Die code klopt niet. Kijk op het kaartje naast de QR-code.",
+    "hulp": "Code kwijt? Vraag hem even aan Norvin.",
+    "code": "1234"
+  },
   "welkom": "Welkom. Alles wat je nodig hebt staat hieronder — wifi, tijden, en waar je lekker eet.",
   "enNotice": "De Engelse versie is in deze mock-up nog niet uitgewerkt.",
   "nav": [

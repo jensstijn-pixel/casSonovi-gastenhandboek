@@ -2,6 +2,51 @@
 
 Projectgeheugen. Nieuwste bovenaan.
 
+## 2026-07-29 — toegangscode voor het slot
+
+**Gebouwd**
+
+- Codescherm vóór het handboek. De gast scant in het huis de QR-code en vult de code in die
+  op hetzelfde papiertje staat. Mock-upcode: **1234** (`CODE` bovenin `assets/js/app.js`).
+- Opbouw: `<div id="gate">` boven een nieuwe wrapper `<main id="handboek">`. `<body>` start met
+  class `locked`; CSS verbergt het handboek. Zo flitst er nooit iets op voordat JS geladen is.
+- Vormgeving volgt de hero: fotostrook van 296px met de naam erin, daaronder het kaartje op
+  crème. Een schermvullende foto zag er niet uit — in een kolom van 390px zoomt `object-fit:
+  cover` zo ver in dat je alleen dak en muur ziet.
+- Onthouden in `localStorage` (`casSonovi.toegang`), net als de checklist en de taalkeuze.
+  Eén keer invullen per toestel.
+- Veld controleert automatisch zodra er vier cijfers staan; de knop blijft bestaan voor
+  toetsenbord en schermlezer. Alleen cijfers, `autofocus` aan.
+- Teksten ook in `content/content.nl.json` onder `toegang`.
+
+**Keuzes en waarom**
+
+- **Geen echte beveiliging, en dat kan ook niet.** Bij een statische site staat de code
+  onvermijdelijk in de broncode. Dit is een drempel tegen per ongeluk delen van de link —
+  precies wat hier nodig is. Wil je het écht dicht, dan is er een server of Cloudflare Access
+  nodig; dat is een eigen project.
+- **`<noscript>`-fallback in `<head>`** die het slot verbergt en het handboek toont. De handoff
+  eist dat hulp en wifi werken zonder JS (een gast moet 911 kunnen bellen). Zonder deze regel
+  zou een JS-loze bezoeker tegen een dichte deur aanlopen.
+- **`spy()` opnieuw aanroepen na het ontgrendelen.** Zolang het handboek verborgen is, is
+  `offsetTop` van elke sectie 0 en zou de nav-chip verkeerd staan. Niet weghalen.
+
+**Getest (zelf, in Chrome op localhost)**
+
+- Eerste bezoek: slot zichtbaar, `#handboek` op `display: none`, pagina niet scrollbaar,
+  wifi-wachtwoord niet in beeld.
+- Foute code (9876): melding verschijnt, veld leeg, focus terug in het veld.
+- `1234` blind intypen zonder klikken: autofocus werkt, veld opent bij het vierde cijfer.
+- Na ontgrendelen: chip "Hulp" actief, `offsetTop`-waarden kloppen, sprong naar "Vertrek"
+  werkt en de laatste chip licht op (na een paint — zie de rAF-valkuil hieronder).
+- Herladen: blijft open. `localStorage.removeItem('casSonovi.toegang')` → weer op slot.
+- Console schoon.
+- **Niet getest:** echte telefoon (cijfertoetsenbord, knopgrootte) en de `<noscript>`-route.
+
+**Openstaand — erbij gekomen**
+
+7. Echte toegangscode van Norvin (nu `1234`), plus het papiertje met QR + code voor in huis.
+
 ## 2026-07-27 — mock-up gebouwd
 
 **Wat er lag bij de start**
